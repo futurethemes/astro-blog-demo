@@ -15,8 +15,8 @@ dependencies:
     specifier: ^4.1.2
     version: 4.1.2(typescript@5.3.3)
   astro-blog:
-    specifier: ^0.1.2
-    version: 0.1.2(zod@3.22.4)
+    specifier: ^0.1.3
+    version: 0.1.3(zod@3.22.4)
   astro-font:
     specifier: ^0.0.72
     version: 0.0.72
@@ -1390,8 +1390,8 @@ packages:
     hasBin: true
     dev: false
 
-  /astro-blog@0.1.2(zod@3.22.4):
-    resolution: {integrity: sha512-egW5gyu7UYjok4ibz7f6YijXyzv7rTCu7l5wbAqGr9zj76CdsWXZ9APEPYP9KeeeEqPvPOz4bKgnogouZhiFIA==}
+  /astro-blog@0.1.3(zod@3.22.4):
+    resolution: {integrity: sha512-cDoERl0ArVWNOqCBjDZbhJwMnF0gjGcKL2NEGRQIxBBPwPN6eih1OAfWXJEEp0/2jS1SyN20jHLThpwPLcddUA==}
     dependencies:
       '@astrojs/check': 0.4.1(typescript@5.3.3)
       '@astrojs/mdx': 2.0.4(astro@4.1.2)
