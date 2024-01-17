@@ -1,0 +1,20 @@
+---
+import Layout from "../components/layouts/Layout.astro"
+---
+
+<Layout title="Astro Blog">
+	<a href="https://github.com/futurethemes/astro-blog" target="_blank">
+		<h1 class="relative text-5xl md:text-8xl font-black text-center mb-2 hover:text-indigo-500 transition-colors">astro-blog</h1>
+	</a>
+	<p class="text-center mb-8">The easiest way to add a blog to your Astro site!</p>
+	<pre class="py-6 px-8 mb-8 bg-amber-400 dark:bg-rose-600 rounded-2xl">astro add astro-blog</pre>
+	<p class="mb-8">Docs coming soon! They'll be built with <a href="https://starlight.astro.build" target="_blank" class="text-amber-400 dark:text-indigo-500 hover:text-indigo-500 transition-colors">Starlight</a>, of course.</p>
+	<a href="/blog" class="py-4 px-8 bg-indigo-500 hover:bg-indigo-700 hover:text-slate-200 transition-colors rounded-full text-slate-100 font-black drop-shadow-lg">Go to Blog</a>
+</Layout>
+
+<style>
+	h1::after {
+		content: "🔗";
+		@apply absolute -top-4 -right-4 md:top-0 md:right-0 text-lg;
+	}
+</style>

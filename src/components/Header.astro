@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets'
+
+import ThemeSwitcher from './ThemeSwitcher.astro'
+
+const logoLight = import('../assets/images/logo.png')
+const logoDark = import('../assets/images/logo-dark.png')
+---
+
+<div>
+    <div class="container mx-auto p-8 pb-0 max-w-4xl flex items-center justify-between" {...Astro.props}>
+        <div class="left">
+            <a href="/" class="block">
+                <span aria-hidden="true" class="hidden">Home</span>
+                <Image src={ logoDark } alt={ 'Astro Blog by FutureThemes' } class="w-12 dark:hidden" />
+                <Image src={ logoLight } alt={ 'Astro Blog by FutureThemes' } class="w-12 hidden dark:block" />
+            </a>
+        </div>
+        <div class="right flex items-center gap-4">
+            <a href="/blog" class="py-3 px-6 rounded-full bg-amber-400 hover:bg-amber-500 transition-colors dark:bg-indigo-500 dark:hover:bg-indigo-600 text-slate-100 text-lg drop-shadow font-black">Blog</a>
+            <ThemeSwitcher />
+        </div>
+    </div>
+</div>

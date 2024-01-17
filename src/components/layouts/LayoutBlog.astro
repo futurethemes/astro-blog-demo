@@ -1,0 +1,109 @@
+---
+import { Image } from 'astro:assets'
+import { AstroFont } from 'astro-font'
+import { SEO } from 'astro-seo'
+import { type AstroBlogLayoutProps } from 'astro-blog'
+import { AstroBlogLogos } from 'astro-blog/logos'
+import { type AstroBlogLogosConfig } from 'astro-blog/schema'
+
+import Header from '../Header.astro'
+import Footer from '../Footer.astro'
+
+const { title, description, seo, config } = Astro.props as AstroBlogLayoutProps
+
+const { title: siteName } = config
+
+const { light: logoLight, alt: logoAlt } = AstroBlogLogos as  AstroBlogLogosConfig
+
+const canonical = new URL(Astro.url.pathname, Astro.site)
+---
+
+<script is:inline>
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (prefersDarkMode) {
+        document.documentElement.classList.remove('light')
+        document.documentElement.classList.toggle('dark')
+    }
+</script>
+
+<html lang="en" class="light">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+        <SEO
+            {title}
+            titleTemplate={`%s - ${ siteName }`}
+            {description}
+            {canonical}
+            {...seo}
+        />
+
+        <AstroFont
+            config={[
+                {
+                    src: [],
+                    name: 'Raleway',
+                    googleFontsURL: 'https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;900&display=swap',
+                    preload: true,
+                    display: 'swap',
+                    selector: 'body',
+                    fallback: 'sans-serif',
+                },
+            ]}
+        />
+
+        <slot name="head" />
+	</head>
+	<body class="min-h-[100vh] bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+        <div class="min-h-[100svh] grid grid-rows-[auto_1fr]">
+            <div>
+                <Header />
+            </div>
+            <div class="container mx-auto py-8 px-8 max-w-4xl">
+                <slot />
+            </div>
+        </div>
+        <Footer />
+	</body>
+</html>
+
+<style is:global>
+
+    *:root {
+        --scrollbar-foreground: theme('colors.amber.300');
+        --scrollbar-background: theme('colors.gray.900');
+        --primary: theme('colors.amber.400')
+    }
+    
+    * {
+        /* Foreground, Background */
+        scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+    }
+    
+    *::-webkit-scrollbar {
+        width: 20px; /* Mostly for vertical scrollbars */
+        height: 10px; /* Mostly for horizontal scrollbars */
+    }
+    
+    *::-webkit-scrollbar-thumb { /* Foreground */
+        background: var(--scrollbar-foreground);
+        border-radius: 9999px;
+        background-clip: content-box;
+        border: 5px solid transparent;
+    }
+    
+    *::-webkit-scrollbar-track { /* Background */
+        background: var(--scrollbar-background);
+    }
+    
+    html.dark {
+        --scrollbar-foreground: theme('colors.indigo.500');
+        --scrollbar-background: theme('colors.gray.900');
+        --primary: theme('colors.indigo.500')
+    }
+        
+</style>

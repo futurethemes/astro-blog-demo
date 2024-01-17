@@ -1,0 +1,112 @@
+---
+import { SEO, type Props } from 'astro-seo'
+import { AstroFont } from 'astro-font'
+
+import Header from '../Header.astro'
+import Footer from '../Footer.astro'
+
+const title = 'Home'
+const siteName = 'Astro Blog'
+const description = 'Astro Blog is an integration for AstroJS which makes it trivial to add a blog to any site!'
+const openGraph = {
+    basic: {
+        title: 'Add a blog to any AstroJS site in minutes!',
+        type: 'website',
+        image: '/og.png',
+        url: 'https://astro-blog.futurethemes.io'
+    },
+} satisfies Props['openGraph']
+const twitter = {
+    card: 'summary_large_image',
+    creator: '@jdtjenkins',
+    site: 'https://astro-blog.futurethemes.io',
+} satisfies Props['twitter']
+---
+
+<script is:inline>
+    const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    if (prefersDarkMode) {
+        document.documentElement.classList.remove('light')
+        document.documentElement.classList.toggle('dark')
+    }
+</script>
+
+<html lang="en" class="light">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+        <SEO
+            {title}
+            titleTemplate={`%s - ${ siteName }`}
+            {description}
+            {openGraph}
+            {twitter}
+        />
+
+        <AstroFont
+            config={[
+                {
+                    src: [],
+                    name: 'Raleway',
+                    googleFontsURL: 'https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;900&display=swap',
+                    preload: true,
+                    display: 'swap',
+                    selector: 'body',
+                    fallback: 'sans-serif',
+                },
+            ]}
+        />
+
+        <slot name="head" />
+	</head>
+	<body class="bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+        <div class="min-h-[100svh] grid grid-rows-[auto_1fr]">
+            <Header />
+            <div class="container mx-auto py-8 px-8 max-w-4xl grid content-center justify-items-center">
+                <slot />
+            </div>
+        </div>
+        <Footer />
+	</body>
+</html>
+
+<style is:global>
+
+*:root {
+    --scrollbar-foreground: theme('colors.amber.300');
+    --scrollbar-background: theme('colors.gray.900');
+    --primary: theme('colors.amber.400')
+}
+
+* {
+    /* Foreground, Background */
+    scrollbar-color: var(--scrollbar-foreground) var(--scrollbar-background);
+}
+
+*::-webkit-scrollbar {
+    width: 20px; /* Mostly for vertical scrollbars */
+    height: 10px; /* Mostly for horizontal scrollbars */
+}
+
+*::-webkit-scrollbar-thumb { /* Foreground */
+    background: var(--scrollbar-foreground);
+    border-radius: 9999px;
+    background-clip: content-box;
+    border: 5px solid transparent;
+}
+
+*::-webkit-scrollbar-track { /* Background */
+    background: var(--scrollbar-background);
+}
+
+html.dark {
+    --scrollbar-foreground: theme('colors.indigo.500');
+    --scrollbar-background: theme('colors.gray.900');
+    --primary: theme('colors.indigo.500')
+}
+    
+</style>
