@@ -1,12 +1,14 @@
 import { defineConfig, squooshImageService } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import AstroBlog from "astro-blog";
+import AstroIcon from 'astro-icon'
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://astro-blog-demo.futurethemes.io',
   integrations: [
     tailwind(),
+    AstroIcon(),
     AstroBlog({
       title: 'Astro Blog Demo',
       logo: {
